@@ -73,8 +73,9 @@ plt.savefig(save_path)
 
 
 # Binary Outlier IQR: all columns Boxplot IQR
+df_iqr = df.copy()
 for col in columns_outliers:
-    mark_outliers_iqr_df = iqr.mark_outliers_iqr(df, col)  
+    mark_outliers_iqr_df = iqr.mark_outliers_iqr(df_iqr, col)  
     save_path = f"../../../../reports/figures/Preis_House_With_Multiple_Regression/iqr/{col}_binary_plot.png"
     pbo.plot_binary_outliers(dataset=mark_outliers_iqr_df, col = col, outlier_col= col +"_outlier", reset_index=True, save_path=save_path)
 
@@ -87,5 +88,15 @@ for col in columns_outliers:
     mark_outliers_schauvenet_df = schauvenet.mark_outliers_chauvenet(df_schauvenet, col)
     save_path = f"../../../../reports/figures/Preis_House_With_Multiple_Regression/schauvenet/{col}_binary_plot.png"
     pbo.plot_binary_outliers(dataset=mark_outliers_schauvenet_df, col = col, outlier_col= col +"_outlier", reset_index=True, save_path=save_path)
+
+# --------------------------------------------------------------
+# 7 Outlier of sensor with local outlier factor
+# -------------------------------------------------------------
+df_lof = df.copy()
+df_lof = df_lof.reset_index(drop=True)
+mark_outliers_lof_df, outliers, X_score = lof.mark_outliers_lof(df_lof, columns_outliers)
+for col in columns_outliers:
+    save_path = f"../../../../reports/figures/Preis_House_With_Multiple_Regression/lof/{col}_binary_plot.png"
+    pbo.plot_binary_outliers(dataset=mark_outliers_lof_df, col = col, outlier_col= "outlier_lof", reset_index=True, save_path=save_path)
 
 

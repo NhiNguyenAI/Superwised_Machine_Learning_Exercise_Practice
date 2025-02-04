@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import os
 
-def plot_binary_outliers(dataset, col, outlier_col, reset_index, save_path=None):
+def plot_binary_outliers(dataset, col, outlier_col, reset_index, save_path=None, title = None):
     """ Plot outliers in case of a binary outlier score. Here, the col specifies the real data
     column and outlier_col the columns with a binary value (outlier or not).
 
@@ -10,6 +10,9 @@ def plot_binary_outliers(dataset, col, outlier_col, reset_index, save_path=None)
         col (string): Column that you want to plot
         outlier_col (string): Outlier column marked with true/false
         reset_index (bool): whether to reset the index for plotting
+        save_path (string, optional): Path to save the plot
+        title (string, optional): Title of the plot
+
     """
 
     # Taken from: https://github.com/mhoogen/ML4QS/blob/master/Python3Code/util/VisualizeDataset.py
