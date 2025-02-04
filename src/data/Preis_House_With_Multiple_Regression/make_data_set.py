@@ -8,11 +8,10 @@ data_file = pd.read_csv("../../../data/raw/housing.csv")
 
 data_file.info()
 
-dataset = data_file.dropna()
-dataset.info()
+
 
 
 # --------------------------------------------------------------
 # Export the Processed Dataset
 # --------------------------------------------------------------
-pickel_file = dataset.to_pickle("../../../data/interim/data_process.pkl")
+pickel_file = data_file.to_pickle("../../../data/interim/data_process.pkl")
