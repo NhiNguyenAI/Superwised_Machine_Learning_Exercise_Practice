@@ -15,12 +15,14 @@ mpl.rcParams['figure.dpi'] = 100
 # ----------------------------------------------------------------------------------------------------------------------------
 # Load data
 # ----------------------------------------------------------------------------------------------------------------------------
+
 df = pd.read_pickle("../../../data/interim/data_process.pkl")
 df.info()
 
 # ----------------------------------------------------------------------------------------------------------------------------
-# Plot single columns
+# Plot single columns with plt
 # ----------------------------------------------------------------------------------------------------------------------------
+
 set_df = df[df["ocean_proximity"] == "NEAR BAY"]
 fig, ax = plt.subplots()
 set_df[["total_rooms"]].plot(ax=ax)  # Pass the axis object
@@ -29,9 +31,9 @@ ax.set_xlabel("Samples")
 plt.legend(["total_rooms", "total_bedrooms","median_house_value"])  # Explicitly set legend labels
 plt.show()
 
-# ----------------------------------------------------------------------------------------------------------------------------
-# Plot columns ocean_proximity
-#----------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------
+# Plot columns ocean_proximity percenotge with sns
+#-----------------------------------------------------------------------------------------------------------------------------
 
 df_housing = df.copy()
 
@@ -41,17 +43,16 @@ ocean_values = df_housing["ocean_proximity"].value_counts()
 plt.figure(figsize=(10,6))
 sns.countplot(x = "ocean_proximity",data=df_housing,order=ocean_values.index)
 
-# ----------------------------------------------------------------------------------------------------------------------------
-# Plot  history columns ocean_proximity
-# ----------------------------------------------------------------------------------------------------------------------------
-
 # showing the percenotge
 for i in range(ocean_values.shape[0]):
     count = ocean_values[i] 
     strt='{:0.2f}%'.format(100*count / df_housing.shape[0]) 
     plt.text(i, count+100, strt, ha='center', color='black', fontsize=14)
 
-# Histogram
+# ----------------------------------------------------------------------------------------------------------------------------
+# Dataframe with Histogram (hist)
+# ----------------------------------------------------------------------------------------------------------------------------
+
 df_housing.hist(bins=25,figsize=(20,10))
 
 # check scatter plot between median_income and median_house_value
@@ -59,17 +60,23 @@ plt.scatter(df_housing["median_income"],df_housing["median_house_value"], alpha=
 
 # ----------------------------------------------------------------------------------------------------------------------------
 # Plot median_house_value with any value between range (0-100k)
+# In the foLLowing example -- any value between range (0-100k) will be the same category,I name it (0-100k)
 # ----------------------------------------------------------------------------------------------------------------------------
-
-## In the foLLowing example -- any value between range (0-100k) will be the same category,I name it (0-100k) 
 
 house_value_bins = pd.cut(x=df_housing["median_house_value"],
                           bins=(-np.inf, 100000, 200000, 300000, 400000, 500000, np.inf),
                                 labels=('-inf to 100k', '100k to 200k', '300k to 400k', '400k to 500k', '500k to 600k', '600k to inf') )
-## countpLot for the above chunks 
-plt.figure(figsize=(15,6)) 
-sns.countplot(x=house_value_bins) 
-plt.title('CountPlot of House Value Bins in Dataset', fontsize=14, c='k') 
-plt.xlabel('House Value Bins', fontsize=14, c='k') 
-plt.ylabel('counts', fontsize=14,c='k') 
-plt.show() 
+## countpLot for the above chunks
+plt.figure(figsize=(15,6))
+sns.countplot(x=house_value_bins)
+plt.title('CountPlot of House Value Bins in Dataset', fontsize=14, c='k')
+plt.xlabel('House Value Bins', fontsize=14, c='k')
+plt.ylabel('counts', fontsize=14,c='k')
+plt.show()
+
+# ----------------------------------------------------------------------------------------------------------------------------
+# Scatter plot between median_income and median_house_value at each ocean_proximity
+# ----------------------------------------------------------------------------------------------------------------------------
+
+sns.relplot(x="median_income", y= "median_house_value", data=df_housing,col="ocean_proximity")
+
