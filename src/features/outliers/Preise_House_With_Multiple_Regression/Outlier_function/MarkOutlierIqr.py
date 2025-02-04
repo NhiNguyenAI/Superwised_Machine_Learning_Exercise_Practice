@@ -23,4 +23,7 @@ def mark_outliers_iqr(dataset, col):
         dataset[col] > upper_bound
     )
 
-    return dataset
+    # outliers = dataset[(dataset[col] < lower_bound) | (dataset[col] > upper_bound)]
+    # outlier_counts = len(outliers)
+
+    return dataset #, outlier_counts
