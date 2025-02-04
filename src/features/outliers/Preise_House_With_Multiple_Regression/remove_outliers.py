@@ -74,7 +74,18 @@ plt.savefig(save_path)
 
 # Binary Outlier IQR: all columns Boxplot IQR
 for col in columns_outliers:
-    mark_outliers_iqr_df = iqr.mark_outliers_iqr(df, col)
-    pbo.plot_binary_outliers(dataset=mark_outliers_iqr_df, col = col, outlier_col= col +"_outlier", reset_index=True)
+    mark_outliers_iqr_df = iqr.mark_outliers_iqr(df, col)  
+    save_path = f"../../../../reports/figures/Preis_House_With_Multiple_Regression/iqr/{col}_binary_plot.png"
+    pbo.plot_binary_outliers(dataset=mark_outliers_iqr_df, col = col, outlier_col= col +"_outlier", reset_index=True, save_path=save_path)
+
+# ----------------------------------------------------------------------------------------------------------------------
+# 6 Outlier of sensor with Schauvenet
+# ----------------------------------------------------------------------------------------------------------------------
+df_schauvenet = df.copy()
+df_schauvenet = df_schauvenet.reset_index(drop=True) 
+for col in columns_outliers:
+    mark_outliers_schauvenet_df = schauvenet.mark_outliers_chauvenet(df_schauvenet, col)
+    save_path = f"../../../../reports/figures/Preis_House_With_Multiple_Regression/schauvenet/{col}_binary_plot.png"
+    pbo.plot_binary_outliers(dataset=mark_outliers_schauvenet_df, col = col, outlier_col= col +"_outlier", reset_index=True, save_path=save_path)
 
 
