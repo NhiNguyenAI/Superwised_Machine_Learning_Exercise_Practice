@@ -1,0 +1,60 @@
+'''
+This file is intended to practice implementing the K-Nearest Neighbors algorithm. 
+This Project for predicting diabetes using the K-Nearest Neighbors algorithm.
+Dataset: diabetes.csv
+
+we use numpy, pandas, and sklearn libraries with the following functions:
+    - train_test_split: to split the dataset into training and testing sets.
+    - StandardScaler: to scale the features.
+    - confusion_matrix: to evaluate the model.
+    - accuracy_score: to evaluate the model.
+    - f1_score: to evaluate the model.
+    - KNeighborsClassifier: to build the K-Nearest Neighbors model.
+    - GridSearchCV: to find the best parameters for the model.
+    - Pipeline: to build a pipeline for the model.
+'''
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.metrics import f1_score
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+# Plot settings
+plt.style.use("fivethirtyeight")
+plt.rcParams["figure.figsize"] = (20, 5)
+plt.rcParams["figure.dpi"] = 100
+plt.rcParams["lines.linewidth"] = 2
+
+# --------------------------------------------------------------------------------------------------
+# Load data
+# --------------------------------------------------------------------------------------------------
+
+df = pd.read_csv("../../../data/interim/diabetes.csv")
+df.info()
+
+# --------------------------------------------------------------------------------------------------
+# Setting the columns
+# --------------------------------------------------------------------------------------------------
+predictor_columns = list(df.columns[:-1])
+
+# --------------------------------------------------------------------------------------------------
+# Values of columns like Glucose, BloodPressure, SkinThickness, Insulin, and BMI cannot be zero. It will affect the prediction.
+# Replace the zero values with the mean of the respective columns.
+# --------------------------------------------------------------------------------------------------
+columns_without_zero_values = ["Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI"]
+
+for col in columns_without_zero_values:
+    df[col] = df[col].replace(0, np.nan)
+    mean = int(df[col].mean(skipna=True))
+    df[col] = df[col].replace(np.nan, mean)
+
+# --------------------------------------------------------------------------------------------------
+# Split the data into training and testing sets
+# --------------------------------------------------------------------------------------------------
+
+
