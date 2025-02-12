@@ -1,3 +1,18 @@
+'''
+This file is intended to practice implementing the K-Nearest Neighbors algorithm. 
+This Project for predicting diabetes using the K-Nearest Neighbors algorithm.
+Dataset: diabetes.csv
+
+we use numpy, pandas, and sklearn libraries with the following functions:
+    - train_test_split: to split the dataset into training and testing sets.
+    - StandardScaler: to scale the features.
+    - confusion_matrix: to evaluate the model.
+    - accuracy_score: to evaluate the model.
+    - f1_score: to evaluate the model.
+    - KNeighborsClassifier: to build the K-Nearest Neighbors model.
+    - GridSearchCV: to find the best parameters for the model.
+    - Pipeline: to build a pipeline for the model.
+'''
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
