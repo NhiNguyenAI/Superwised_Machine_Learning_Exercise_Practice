@@ -1,18 +1,48 @@
 # Supervised Machine Learning Exercise Practice
 
-This project is a hands-on exploration of fundamental concepts in supervised machine learning. It focuses on key algorithms such as **Linear Regression**, **Multiple Variables Regression**, **Logistic Regression**, **K-Nearest Neighbors (KNN)**, **Decision Trees**, and other essential techniques. The purpose of the project is to provide practical experience while reinforcing theoretical knowledge from the **Machine Learning Specialization** course.
+This project is a hands-on exploration of fundamental concepts in supervised machine learning.
+
+This Project belongt 3 small Project with the difference Topic, this Topic is populate but i will change the method to prection. I use difference Algorithms to predict.
+
+ - House Preise Predictor, this is a small project of the Regression Topic of the Machine Learning
+ - Illnes Diabetest Predictor, this is a small project of the classification
+ - One Project use of the Classification with 4 Algorithms use and afterthat choose the best choise
 
 ## Project Overview
 
 Throughout this project, you will implement various supervised learning algorithms. Each section corresponds to specific topics discussed in the course lectures, reinforcing learning through practical coding exercises and implementations.
 
+
 ### Key Algorithms Covered:
+
+#### Regression:
 - **Linear Regression**
 - **Multiple Variables Regression**
+
+#### Classification:
 - **Logistic Regression**
 - **K-Nearest Neighbors (KNN)**
 - **Decision Trees**
-- **Other Essential Supervised Learning Techniques**
+- **Support Vector Machines**
+
+###
+- **Cross Vadiation**
+- **Grid Search CV**
+- **Standard Scarler**
+
+
+### Feature Engineering
+ - **PCA Principal componenten Analyse**
+ - **Sum of squares attributes**
+ - **Temporal abstraction**
+ - **Frequency features**
+ - **Cluster**
+
+### Outliers Detection
+- **Local Outlier Factor**
+- **Interquantile Range IQR**
+- **Schauvenet**
+
 
 The project will guide you step-by-step in implementing these algorithms, enabling you to better understand their functionality, application, and practical use cases.
 

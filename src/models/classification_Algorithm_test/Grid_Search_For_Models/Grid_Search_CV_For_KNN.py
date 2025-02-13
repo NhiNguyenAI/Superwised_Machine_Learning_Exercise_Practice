@@ -35,8 +35,8 @@ sns.scatterplot(x=y_train, y=model.fit(X_train, y_train).predict(X_train), label
 
 # Predict and calculate performance (Mean Squared Error) for the model without Grid Search
 y_pred = model.predict(X_test)
-mse_no_grid_search = mean_squared_error(y_test, y_pred)
-print(f"Mean Squared Error (without Grid Search): {mse_no_grid_search:.4f}")
+mse_no_grid_search_without_grid_search = mean_squared_error(y_test, y_pred)
+print(f"Mean Squared Error (without Grid Search): {mse_no_grid_search_without_grid_search:.4f}")
 
 # Define the parameter grid for Grid Search
 p_grid = {
