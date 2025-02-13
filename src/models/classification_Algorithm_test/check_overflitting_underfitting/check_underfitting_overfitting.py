@@ -1,11 +1,10 @@
 '''
-    This file is designed to explore and implement the concepts of Overfitting and Underfitting in Machine Learning models, using three key techniques to optimize and evaluate model performance: Grid Search, Ridge Regression (L2 Regularization), and Lasso Regression (L1 Regularization).
+    This file is designed to explore and implement the concepts of Overfitting and Underfitting in Machine Learning models, using three key techniques to optimize and evaluate model performance: Ridge Regression (L2 Regularization), and Lasso Regression (L1 Regularization).
 
-        1. **Grid Search**: This method is used to systematically search for the best hyperparameters for a model by performing an exhaustive search over a specified parameter grid. It helps improve the model's performance by tuning the hyperparameters, ensuring the model generalizes well to unseen data.
 
-        2. **Ridge Regression (L2 Regularization)**: Ridge Regression applies L2 regularization, which adds a penalty term to the loss function proportional to the square of the magnitude of the coefficients. This helps to prevent overfitting by constraining the model's complexity and reducing the impact of less important features. It is especially useful when there is multicollinearity among the features or when the number of features is large.
+        1. **Ridge Regression (L2 Regularization)**: Ridge Regression applies L2 regularization, which adds a penalty term to the loss function proportional to the square of the magnitude of the coefficients. This helps to prevent overfitting by constraining the model's complexity and reducing the impact of less important features. It is especially useful when there is multicollinearity among the features or when the number of features is large.
 
-        3. **Lasso Regression (L1 Regularization)**: Lasso Regression uses L1 regularization, which adds a penalty term proportional to the absolute value of the coefficients. Lasso is particularly effective for feature selection as it tends to shrink the coefficients of less important features to zero, effectively eliminating them from the model. It helps both with overfitting and underfitting by reducing the model’s complexity and improving generalization.
+        2. **Lasso Regression (L1 Regularization)**: Lasso Regression uses L1 regularization, which adds a penalty term proportional to the absolute value of the coefficients. Lasso is particularly effective for feature selection as it tends to shrink the coefficients of less important features to zero, effectively eliminating them from the model. It helps both with overfitting and underfitting by reducing the model’s complexity and improving generalization.
 
     In this file, we implement and compare the performance of a Support Vector Regressor (SVR) model, first without any hyperparameter tuning and then with the application of Grid Search for hyperparameter optimization. We also explore the use of Ridge and Lasso regressions to address overfitting and underfitting.
 
@@ -49,50 +48,6 @@ test_score_no_grid_search = model.score(X_test, y_test)
 mse_train_no_grid_search = mean_squared_error(y_train, model.predict(X_train))
 mse_test_no_grid_search = mean_squared_error(y_test, y_pred)
 
-# Evaluate the model with Grid Search on both training and test data
-SVR()
-p_grid = {
-            'kernel': ['rbf', 'linear', 'poly', 'sigmoid'],
-            'degree': np.arange(1, 10),
-            'C': np.logspace(-3, 3, 7),
-          }
-
-grid = GridSearchCV(model, param_grid=p_grid, cv=10)
-grid.fit(X_train, y_train)
-
-pd.DataFrame(grid.cv_results_).iloc[:, 5:]
-
-y_pred_grid_search = grid.predict(X_test)
-train_score_with_grid_search = grid.score(X_train, y_train)
-test_score_with_grid_search = grid.score(X_test, y_test)
-mse_train_with_grid_search = mean_squared_error(y_train, grid.predict(X_train))
-mse_test_with_grid_search = mean_squared_error(y_test, y_pred_grid_search)
-
-# Print the results
-print(f"Model without Grid Search:")
-print(f"Training Score: {train_score_no_grid_search:.2f}, Test Score: {test_score_no_grid_search:.2f}")
-print(f"MSE (Train): {mse_train_no_grid_search:.2f}, MSE (Test): {mse_test_no_grid_search:.2f}")
-
-print(f"\nModel with Grid Search:")
-print(f"Training Score: {train_score_with_grid_search:.2f}, Test Score: {test_score_with_grid_search:.2f}")
-print(f"MSE (Train): {mse_train_with_grid_search:.2f}, MSE (Test): {mse_test_with_grid_search:.2f}")
-
-# Identify overfitting or underfitting
-def detect_overfitting_underfitting(train_score, test_score, mse_train, mse_test):
-    if train_score > test_score and mse_train < mse_test:
-        return "Possible Overfitting"
-    elif train_score < test_score and mse_train > mse_test:
-        return "Possible Underfitting"
-    elif train_score == test_score and mse_train == mse_test:
-        return "Good Fit (No Overfitting or Underfitting)"
-    else:
-        return "Check further"
-
-# Check the model without Grid Search
-print(f"\nModel without Grid Search: {detect_overfitting_underfitting(train_score_no_grid_search, test_score_no_grid_search, mse_train_no_grid_search, mse_test_no_grid_search)}")
-
-# Check the model with Grid Search
-print(f"\nModel with Grid Search: {detect_overfitting_underfitting(train_score_with_grid_search, test_score_with_grid_search, mse_train_with_grid_search, mse_test_with_grid_search)}")
 
 # Regularization: Ridge (L2) and Lasso (L1) models to address overfitting/underfitting
 
