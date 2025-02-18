@@ -58,7 +58,7 @@ y = df_train["Outcome"]
 # Take 20% of dataset for the test
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
 
-# --------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------
 # Feature Scaling
 # --------------------------------------------------------------------------------------------------
 sc_X = StandardScaler()
@@ -151,7 +151,7 @@ score_df = pd.concat([score_df, new_scores])
 accuracy = accuracy_score(y_test, class_test_y)
 
 # --------------------------------------------------------------------------------------------------
-# Train the K-Nearest Neighbors model with 
+# Train the K-Nearest Neighbors model with
 # --------------------------------------------------------------------------------------------------
 
 # n_neighbors = sqrt(len(y_test)) rounded and subtracted by 1 as per your logic
